@@ -1,0 +1,45 @@
+
+function [y,y conv]-exp2_6285_flip(a,b)
+x=a; h=b;
+1x-length(a); 1h-length(b);
+if lx>1h
+else
+end
+h=[b zeros(1,1x-1h)];
+x=[a zeros(1,1h-1x)];
+y=zeros(1, 1x+1h-1);
+x_f=fliplr(x); y_conv-conv(a,b);
+for 1-1:length(y)
+if i<-length(x_f)
+else
+j-i-length(x_f);
+y(i)=sum(x_f(1,length(x_f)-i+1:length(x_f)). *h(1,1:1));
+y(i)=sum(x_f(1,1:length(x_f)-j). *h(1, j+1:length(h)));
+end
+end
+end
+subplot(2,2,1);
+stem(0:length(x_f)-1,x_f, 'r', 'linewidth', 1.75);
+title('x(n) flipped')
+grid on
+xlabel('\bf Sample Index \rightarrow');
+ylabel('\bf Amplitude \rightarrow');
+subplot(2,2,2);
+stem(0:length(h)-1,h, 'r', 'linewidth', 1.75);
+title('h(n)')
+grid on
+xlabel('\bf Sample Index \rightarrow');
+ylabel('\bf \leftarrow Amplitude \rightarrow');
+subplot(2,2,3);
+stem(0:length(y)-1,y, 'r', 'linewidth', 1.75);
+title('y(n) using fliplr')
+grid on
+xlabel('\bf Sample Index \rightarrow');
+ylabel('\bf \leftarrow Amplitude \rightarrow');
+subplot(2,2,4);
+stem(0:length(y_conv)-1,y_conv, 'r', 'linewidth',1.75);
+title('y(n) using conv function')
+grid on
+xlabel('\bf Sample Index \rightarrow')
+ylabel('\bf \leftarrow Amplitude \rightarrow')
+head-sprintf('Lab 2\nAditya Saini 102206286 3EC9\n'); sgtitle(['\bf',head]);
