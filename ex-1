@@ -1,0 +1,26 @@
+function [y] = lablb_6286(UL, f, d)
+    t = 0:0.0001:UL; 
+    % Generate a square wave using the 'square' function
+    y = square(2 * pi * f * t, d); 
+
+    % Create the first subplot (Continuous Time Square Wave)
+    subplot(1, 2, 1) 
+    plot(t, y, 'r', 'LineWidth', 1.75) 
+    grid on 
+    title('Square Wave (CT)') 
+    xlabel('\bf Time (t) \rightarrow') 
+    ylabel('\bf \leftarrow Amplitude \rightarrow') 
+
+    % Create the second subplot (Discrete Time Square Wave)
+    subplot(1, 2, 2) 
+    stem(t, y, 'r', 'LineWidth', 1.75) 
+    grid on 
+    title('Square Wave (DT)') 
+    xlabel('\bf Sample-Number (n) \rightarrow') 
+    ylabel('\bf \leftarrow Amplitude \rightarrow') 
+
+    % Add a title to the entire figure
+    head = sprintf('Lab I (b)\nPriyam Ganguli 102206285 3ec8\n');
+    suptitle(['\bf', head]); 
+end
+
