@@ -20,27 +20,23 @@ end
 XT(n+1)=XT(n+1) + (1/N) * XF (k+1)*exp((+11*2*pi*n*k)/N);
 end
 subplot(2,2,1)
-stem(0:N-1, abs(XF), 'r', 'linewidth',1.75)
-title('Magnitude Spectrum using loop')
+stem(0:N-1, abs(XF), 'r', 'linewidth',1.75), title('Magnitude Spectrum using loop')
 grid on
 xlabel('\bf k \rightarrow')
 ylabel('\bf X(k)| \rightarrow')
 subplot(2,2,2)
-stem(0:N-1, angle (XF), 'r', 'linewidth',1.75)
-title('Phase Spectrum using loop')
+stem(0:N-1, angle (XF), 'r', 'linewidth',1.75), title('Phase Spectrum using loop')
 grid on
 xlabel('\bf k \rightarrow')
 ylabel('\bf \leftarrow \angleX (k) \rightarrow')
 
 subplot (2,2,3)
-stem(0:N-1,abs (DFT), 'r', 'linewidth',1.75)
-title('Magnitude Spectrum using FFT function') 
+stem(0:N-1,abs (DFT), 'r', 'linewidth',1.75), title('Magnitude Spectrum using FFT function') 
 grid on
 xlabel('\bf k \rightarrow')
 ylabel('\bf X(k)| \rightarrow')
 subplot (2,2,4)
-stem(0: N-1, angle (DFT), 'r', 'linewidth',1.75)
-title('Phase Spectrum using FFT function')
+stem(0: N-1, angle (DFT), 'r', 'linewidth',1.75), title('Phase Spectrum using FFT function')
 grid on
 xlabel('\bf k \rightarrow')
 ylabel('\bf \leftarrow \angleX (k) \rightarrow')
@@ -52,14 +48,12 @@ grid on
 xlabel('\bf n \rightarrow')
 ylabel('\bf x(n)| \rightarrow')
 subplot (2,2,2)
-stem (0: L-1, angle (XT (1: L)), 'r', 'linewidth',1.75)
-title('Phase Spectrum using loop')
+stem (0: L-1, angle (XT (1: L)), 'r', 'linewidth',1.75), title('Phase Spectrum using loop')
 grid on
 xlabel('\bf n \rightarrow')
 ylabel('\bf \leftarrow \anglex(n)')
 subplot (2,2,3)
-stem(0: L-1, abs(IDFT(1:L)), 'r', 'linewidth',1.75)
-title('Magnitude Spectrum using IFFT function')
+stem(0: L-1, abs(IDFT(1:L)), 'r', 'linewidth',1.75), title('Magnitude Spectrum using IFFT function')
 grid on
 xlabel('\bf n \rightarrow')
 ylabel('\bf x(n)| \rightarrow')
@@ -69,14 +63,12 @@ stem (0: L-1,angle (IDFT(1:L)), 'r', 'linewidth',1.75)
 else
 ylabel('\bf \leftarrow \anglex(n)')
 subplot(2,2,3)
-stem(0:L-1,abs (IDFT (1:L)), 'r', 'linewidth',1.75) 
-title('Magnitude Spectrum using IFFT function')
+stem(0:L-1,abs (IDFT (1:L)), 'r', 'linewidth',1.75) , title('Magnitude Spectrum using IFFT function')
 grid on
 xlabel('\bf n \rightarrow')
 ylabel('\bf x(n)| \rightarrow')
 subplot(2,2,4)
-stem(0:L-1, angle (IDFT (1:L)), 'r', 'linewidth',1.75)
-title('Phase Spectrum using IFFT function')
+stem(0:L-1, angle (IDFT (1:L)), 'r', 'linewidth',1.75), title('Phase Spectrum using IFFT function')
 grid on
 xlabel('\bf n \rightarrow')
 ylabel('\bf \leftarrow \anglex(n)')
