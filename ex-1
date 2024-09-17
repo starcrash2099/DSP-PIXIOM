@@ -1,4 +1,44 @@
-function [y] = lablb_6286(UL, f, d)
+
+function [x, y, z,n]-labla_6285 (n0,nl,n2)
+n=[n1:n2];
+x= [(n-n0)
+== 0];
+y=[(n-n0) >= 0];
+z=[n>0]
+-
+[n<0];
+subplot (2,2,1)
+stem (n,x, 'r', 'linewidth',1.75)
+grid on
+title('Unit Impulse Function')
+xlabel('\bf \leftarrow Sample-Number (n) \rightarrow') ylabel('\bf Amplitude \rightarrow')
+subplot (2,2,2)
+stem (n,y, 'r', 'linewidth',1.75)
+grid on
+title('Unit Step Function')
+xlabel('\bf \leftarrow Sample-Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+subplot (2,2,3)
+stem (n,z, 'r', 'linewidth',1.75)
+grid on
+title('Signum Function (DT)')
+xlabel('\bf \leftarrow Sample-Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+subplot (2,2,4)
+plot (n, z, 'r', 'linewidth',1.75)
+grid on
+title('Signum Function (CT)')
+xlabel('\bf \leftarrow Sample-Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+head-sprintf('Lab 1 (a) \npriyam ganguli 102206285 3EC8\n');
+suptitle(['\bf', head]);
+end
+
+
+B) 
+
+
+function [y] = labla_6285(UL, f, d)
     t = 0:0.0001:UL; 
     % Generate a square wave using the 'square' function
     y = square(2 * pi * f * t, d); 
@@ -22,5 +62,26 @@ function [y] = lablb_6286(UL, f, d)
     % Add a title to the entire figure
     head = sprintf('Lab I (b)\nPriyam Ganguli 102206285 3ec8\n');
     suptitle(['\bf', head]); 
+end
+
+
+C)
+
+
+function [yl, y2]=1ab1c_6285 (A1, A2, freq, phi)
+t (25/1000) (0.001*25/1000): (25/1000);
+p=phi. *ones (1, length (t));
+y1=A1*cos((2*pi*freq). *t+p);
+y2=A2*cos( (2*pi*freq). *t+p);
+plot (t,yl, 'r',t,y2, 'b', 'linewidth',1.75)
+grid on
+title('Sinusoidal Signal (CT)')
+xlabel('\bf \leftarrow Time (t) \rightarrow')
+ylabel('\bf \leftarrow Amplitude \rightarrow')
+al-sprintf('A=%. f',Al);
+a2=sprintf('A=%. f', A2);
+legend (a1, a2)
+head=sprintf('Lab 1 (c)\nAditya Saini 102206285 3EC8 \n');
+suptitle(['\bf', head]);
 end
 
