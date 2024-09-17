@@ -1,0 +1,59 @@
+
+function exp5_6285(M,c)
+% Rectangular Window Function
+t=(0:1:M-1);
+A=ones (1,M);
+[H,w]=freqz (A,1,1024);
+wN=w./(2*pi);
+HN=abs (H). /max(abs (H));
+subplot(3,2,1)
+stem(t,A,c, 'linewidth',1.75) title('Rectangular Window Function')
+grid on
+xlabel('\bf Sample Number (n) \rightarrow') ylabel('\bf Amplitude \rightarrow')
+subplot(3,2,2)
+plot (wN, 20. *log10(HN), c, 'linewidth',1.75) title('Frequency Response of Rectangular Window')
+grid on
+xlabel('\bf Normalized Frequency \rightarrow')
+ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+end
+
+
+
+% Hamming Window Function AH=0.54-0.46.*cos((2. *pi. *t)./(M-1));
+[H,w]=freqz (AH,1,1024);
+wN=w./(2*pi);
+HN-abs (H). /max(abs(H));
+subplot(3,2,3)
+stem(t, AH, c, 'linewidth',1.75) title('Hamming Window Function")
+grid on
+xlabel('\bf Sample Number (n) \rightarrow') 
+ylabel('\bf Amplitude \rightarrow')
+subplot(3,2,4)
+plot (WN, 20. *log10(HN), c, 'linewidth',1.75); title('Frequency Response of Hamming Window') grid on
+xlabel('\bf Normalized Frequency \rightarrow')
+ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+% Bartlett Window Function
+AB-zeros(1,M);
+for k=0: (M-1)/2
+end
+AB(k+1)=2*k/(M-1);
+for k=((M-1)/2)+1:M-1
+end
+AB(k+1)-2-((2*k)/(M-1));
+[H,w]=freqz (AB, 1,1024);
+wN=w./(2*pi);
+HN=abs(H)./max(abs(H));
+subplot(3,2,5)
+stem(t, AB, c, 'linewidth',1.75)
+title('Bartlett Window Function')
+grid on
+xlabel('\bf Sample Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+subplot(3,2,6)
+plot (WN, 20. *log10(HN), c, 'linewidth',1.75); title('Frequency Response of Bartlett Window')
+grid on
+xlabel('\bf Normalized Frequency \rightarrow')
+ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+head=sprintf('Lab 5\npriyam ganguli 102206285 3EC8\n');
+suptitle(['\bf',head]);
+end
