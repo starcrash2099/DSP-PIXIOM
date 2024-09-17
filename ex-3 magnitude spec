@@ -1,0 +1,89 @@
+
+function [XF, DFT, XT, IDFT]=exp3_6285(x,N)
+L= length(x);
+if L<=N
+xz=[x, zeros(1,N-L)];
+display(x);
+display(N);
+XF=zeros(1,N);
+XT=zeros(1,N);
+DFT=fft(x,N);
+for k=0: N-1
+end
+for n=0: (N-1)
+end
+XF (k+1)=XF (k+1) + xz (n+1)*exp((-1i*2*pi*k*n)/N);
+IDFT=ifft (XF,N);
+for n=0: N-1
+for k=0: (N-1)
+end
+XT(n+1)=XT(n+1) + (1/N) * XF (k+1)*exp((+11*2*pi*n*k)/N);
+end
+subplot(2,2,1)
+stem(0:N-1, abs(XF), 'r', 'linewidth',1.75)
+title('Magnitude Spectrum using loop')
+grid on
+xlabel('\bf k \rightarrow')
+ylabel('\bf X(k)| \rightarrow')
+subplot(2,2,2)
+stem(0:N-1, angle (XF), 'r', 'linewidth',1.75)
+title('Phase Spectrum using loop')
+grid on
+xlabel('\bf k \rightarrow')
+ylabel('\bf \leftarrow \angleX (k) \rightarrow')
+
+subplot (2,2,3)
+stem(0:N-1,abs (DFT), 'r', 'linewidth',1.75)
+title('Magnitude Spectrum using FFT function') 
+grid on
+xlabel('\bf k \rightarrow')
+ylabel('\bf X(k)| \rightarrow')
+subplot (2,2,4)
+stem(0: N-1, angle (DFT), 'r', 'linewidth',1.75)
+title('Phase Spectrum using FFT function')
+grid on
+xlabel('\bf k \rightarrow')
+ylabel('\bf \leftarrow \angleX (k) \rightarrow')
+head=sprintf('Lab 3 (a) DFT \npriyam ganguli 102206285 3EC9\n') sgtitle(['\bf', head]);
+figure;
+subplot(2,2,1)
+stem(0: L-1, abs(XT(1:L)), 'r', 'linewidth', 1.75) title('Magnitude Spectrum using loop')
+grid on
+xlabel('\bf n \rightarrow')
+ylabel('\bf x(n)| \rightarrow')
+subplot (2,2,2)
+stem (0: L-1, angle (XT (1: L)), 'r', 'linewidth',1.75)
+title('Phase Spectrum using loop')
+grid on
+xlabel('\bf n \rightarrow')
+ylabel('\bf \leftarrow \anglex(n)')
+subplot (2,2,3)
+stem(0: L-1, abs(IDFT(1:L)), 'r', 'linewidth',1.75)
+title('Magnitude Spectrum using IFFT function')
+grid on
+xlabel('\bf n \rightarrow')
+ylabel('\bf x(n)| \rightarrow')
+subplot (2,2,4)
+stem (0: L-1,angle (IDFT(1:L)), 'r', 'linewidth',1.75)
+
+else
+ylabel('\bf \leftarrow \anglex(n)')
+subplot(2,2,3)
+stem(0:L-1,abs (IDFT (1:L)), 'r', 'linewidth',1.75) 
+title('Magnitude Spectrum using IFFT function')
+grid on
+xlabel('\bf n \rightarrow')
+ylabel('\bf x(n)| \rightarrow')
+subplot(2,2,4)
+stem(0:L-1, angle (IDFT (1:L)), 'r', 'linewidth',1.75)
+title('Phase Spectrum using IFFT function')
+grid on
+xlabel('\bf n \rightarrow')
+ylabel('\bf \leftarrow \anglex(n)')
+head=sprintf('Lab 3 (b) IDFT\npriyam ganguli 102206285 3EC8\n');
+sgtitle(['\bf',head]);
+else
+disp('Error: Check assigned values for L and N');
+XF=0; XT=0;
+end
+end
