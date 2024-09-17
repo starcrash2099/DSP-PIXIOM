@@ -42,4 +42,4 @@ title('y(n) using conv function')
 grid on
 xlabel('\bf Sample Index \rightarrow')
 ylabel('\bf \leftarrow Amplitude \rightarrow')
-head-sprintf('Lab 2\nAditya Saini 102206286 3EC9\n'); sgtitle(['\bf',head]);
+head-sprintf('Lab 2\npriyam ganguli 102206285 3EC8\n'); sgtitle(['\bf',head]);
