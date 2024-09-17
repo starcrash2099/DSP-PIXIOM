@@ -1,0 +1,140 @@
+A)
+
+function [y, y_cconv ]=exp4a_6285(x,h)
+N1=length(x);
+N2=length(h);
+N=max(N1, N2);
+x=[x, zeros(1, (N-N1))]; h=[h, zeros(1, (N-N2))];
+y=zeros(1, N); y_cconv=cconv(x,h,N); for n=1:N
+for i=1:N
+j=n-i+1;
+if (j<=0)
+j=N+j;
+end
+y(n)=y(n)+x(i)*h(j);
+end
+end
+for k=1:4
+subplot(2,2,k)
+switch k
+case 1,
+stem (0: N-1,x, 'r', 'linewidth',1.75),
+title('x(n)') case 2, stem (0: N-1, h, 'r', 'linewidth',1.75), title('h(n)') case 3,
+stem(0: N-1,y, 'r', 'linewidth',1.75),
+title('y (n) using for loop')
+end
+end
+end
+case 4, stem (0:N-1,y_cconv, 'r', 'linewidth', 1.75),
+title('y(n) using cconv function')
+grid on
+xlabel('\bf Sample Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+head=sprintf('Lab 4 (a) \nPRIYAM GANGULI 102206285 3EC8\n');
+sgtitle(['\bf', head]);
+end
+
+B)
+
+function [y, y_cconv ]=exp4b_6285(x,h)
+N1=length(x); N2=length(h); N=N1+N2-1;
+x=[x, zeros(1, (N-N1))]; h=[h, zeros(1, (N-N2))]; y=zeros(1, N);
+y_cconv=cconv(x,h,N); for n=1:N
+for i=1:N
+j=n-i+1;
+if (j<=0)
+j=N+j;
+end
+end
+y(n)=y(n)+x(i)*h(j);
+end
+end
+for k=1:4
+subplot(2,2,k)
+switch k
+end
+case 1, stem(0:N-1,x, 'r', 'linewidth',1.75), title('x(n)')
+case 2, stem (0: N-1, h, 'r', 'linewidth', 1.75), title('h(n)')
+case 3,
+case 4,
+grid on
+stem (0: N-1,y, 'r', 'linewidth',1.75), title('y (n) using for loop')
+stem (0:N-1,y_cconv, 'r', 'linewidth', 1.75), title('y(n) using cconv function')
+xlabel('\bf Sample Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+end
+head=sprintf('Lab 4 (b)\nPRIYAM GANGULI 102206285 3EC9\n');
+sgtitle(['\bf', head]);
+
+C)
+
+function [y, y_cconv ]=exp4c_6286(x,h) N1=length(x); N2=length(h);
+N=max(N1, N2);
+x=[x, zeros(1, (N-N1))];
+h=[h, zeros(1, (N-N2))];
+y=zeros (1, N);
+y_linear-conv(x,h); y_cconv=cconv(x,h,N);
+for n=1:length(y_linear) i=mod(n-1,N)+1;
+y(i)=y(i)+y_linear(n);
+end
+end
+for k=1:4
+subplot(2,2,k)
+switch k
+case 1,
+stem (0:N-1,x, 'r', 'linewidth',1.75), title('x(n)') case 2, stem (0: N-1,h, 'r', 'linewidth',1.75), title('h(n)') case 3,
+stem (0:N-1,y, 'r', 'linewidth',1.75), title('y (n) using for loop')
+end
+end
+case 4, stem (0:N-1,y_cconv, 'r', 'linewidth', 1.75), title('y(n) using cconv function')
+grid on
+xlabel('\bf Sample Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+head=sprintf('Lab 4 (c)\nPRIYAM GANGULI  102206285 3EC8\n');
+sgtitle(['\bf', head]);
+end
+
+D)
+
+
+function [y, y_cconv]-exp4d_6285(x,h) N1=length(x); N2=1ength(h);
+N=max(N1, N2);
+x=[x, zeros(1, (N-N1))]; h=[h, zeros(1, (N-N2))];
+x_DFT=zeros(1, N);
+for k=0:N-1
+end
+for n=0: (N-1)
+end
+x_DFT(k+1)=x_DFT (k+1) + x(n+1)*exp((-1i*2*pi*k*n)/N);
+h_DFT=zeros(1, N);
+for k=0:N-1
+end
+for n=0: (N-1)
+end
+h_DFT(k+1)=h_DFT (k+1) + h(n+1)*exp((-11*2*pi*k*n)/N);
+z = x_DFT .* h_DFT;
+y=zeros(1, N);
+end
+y_cconv =
+cconv(x,h,N);
+for n=0:N-1
+for k=0: (N-1)
+end
+y(n+1)=y(n+1)+ (1/N) * z(k+1)*exp((+11*2*pi*n*k)/N);
+end
+for k=1:4
+end
+subplot(2,2,k)
+switch k
+end
+case 1, stem(0:N-1, x, 'r', 'linewidth',1.75), title('x(n)')
+case 2, stem(0:N-1, h, 'r', 'linewidth',1.75), title('h(n)')
+case 3, stem(0:N-1, y, 'r', 'linewidth',1.75), title('y(n) using for loop')
+case 4, stem(0:N-1,y_cconv, 'r', 'linewidth',1.75), title('y (n) using cconv function')
+grid on
+xlabel('\bf Sample Number (n) \rightarrow')
+ylabel('\bf Amplitude \rightarrow')
+head=sprintf('Lab 4 (d) \nPRIYAM GANGULI 102206286 3EC9\n'); 
+sgtitle(['\bf', head]);
+end
+
