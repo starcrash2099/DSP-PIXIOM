@@ -1,0 +1,34 @@
+function [wph,wsh,wch]=exp7a_6286(wp,ws)
+    wc=(ws+wp)/2;                                       % Cutoff Frequency
+    dw=ws-wp;                                           % Transition Width for HPF
+    M=ceil(1.8*pi/dw)+1;                                % No. of filter coefficients to be odd
+    n=linspace(0,M-1,M);                                % Sample points
+    hd=sin(wc.*(n-((M-1)/2)))./(pi.*(n-((M-1)/2)));     % Desired Response
+    hd(1,((M-1)/2)+1)=wc/pi;                            % Desired Reponse at n=(M-1)/2
+    WI=0.54-0.46.*cos((2.*pi.*n)./(M-1));               % Hamming Window Function
+    h=hd.*WI;                                           % Linear Phase FIR Low Pass Filter Coefficients
+    hh=((-1).^n).*h;                                    % LPF to HPF transformation
+    wph=(pi-wp);                                        % Passband Edge Frequency of HPF with Normalized Frequency
+    wsh=(pi-ws);                                        % Stopband Edge Frequency of HPF with Normalized Frequency
+    wch=(wph+wsh)/2;                                    % Cutoff Frequency of HPF with Normalized Frequency
+    [H,w]=freqz(hh,1,1024);
+    wN=w./(2*pi);
+    HN=abs(H)./max(abs(H));
+
+    subplot(2,1,1)
+    stem(n,hh,'r','lineWidth',1.75)
+    title('HPF with Hamming Window Function')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf Amplitude \rightarrow')
+
+    subplot(2,1,2)
+    plot(wN,20.*log10(HN),'r','linewidth',1.75);
+    title('Frequency Response')
+    grid on
+    xlabel('\bf Normalized Frequency \rightarrow')
+    ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+    
+    head=sprintf('Lab 7 (a)\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
