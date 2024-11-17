@@ -1,0 +1,44 @@
+function [h]=exp8_6285(ds,dp,dw,wc1,wc2)
+    d=min(ds,dp);
+    A=-20*log10(d);
+
+    % Beta Determination according to the value of A
+    if A > 50
+        B=0.1102*(A-8.7);
+    elseif (A<=50) && (A>=21) 
+        B=0.5842*((A - 21)^0.4)+0.07886*(A - 21); 
+    else
+        B=0; 
+    end
+
+    M=ceil((A-8)/(2.285*dw))+0;
+    Am=(M-1)/2;
+    n=linspace(0,M-1,M);
+    hd1=sin(wc1.*(n-Am))./((pi.*(n-Am)));
+    hd1(1,(Am+1))=wc1/pi;
+    h1=hd1.*(besseli(0,B.*sqrt(1-((n-Am)./Am).^2))./(besseli(0,B)));
+    hd2=sin(wc2.*(n-Am))./((pi.*(n-Am)));
+    hd2(1,(Am+1))=wc2/pi;
+    h2=hd2.*(besseli(0,B.*sqrt(1-((n-Am)./Am).^2))./(besseli(0,B)));
+    h=h1-h2;
+    [H,w]=freqz(h,1,1024);
+    wN=w./pi;
+    HN=abs(H)./max(abs(H));
+
+    subplot(2,1,1)
+    stem(n,h,'r','lineWidth',1.75)
+    title('BPF with Kaiser Window Function')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf Amplitude \rightarrow')
+
+    subplot(2,1,2)
+    plot(wN,20.*log10(HN),'r','linewidth',1.75);
+    title('Frequency Response')
+    grid on
+    xlabel('\bf Normalized Frequency \rightarrow')
+    ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+    
+    head=sprintf('Lab 8\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
