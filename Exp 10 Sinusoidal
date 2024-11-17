@@ -1,0 +1,60 @@
+function [y1,y3]=exp10_6285(f1,f2)
+    N=51;
+    n=0:1:N-1;
+    y1=sin(2*pi*f1*n);
+    y2=sin(2*pi*f2*n);
+    y3=y1+y2;
+    y1_down=downsample(y1,4);
+    y1_up=upsample(y1,5);
+    y3_down=downsample(y3,4);
+    y3_up=upsample(y3,5);
+
+    subplot(2,2,1:2)
+    stem(n,y1,'r','lineWidth',1.75)
+    title('Sinusoidal Sequence y1(n)')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    subplot(2,2,3)
+    stem(0:length(y1_down)-1,y1_down,'r','lineWidth',1.75)
+    title('4-Factor Down-Sample')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    subplot(2,2,4)
+    stem(0:length(y1_up)-1,y1_up,'r','lineWidth',1.75)
+    title('5-Factor Up-Sample')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    head=sprintf('Lab 10 (a)\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+    figure
+
+    subplot(2,2,1:2)
+    stem(n,y3,'b','lineWidth',1.75)
+    title('Sum of Sinusoidal Sequences y3(n)=y1(n)+y2(n)')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    subplot(2,2,3)
+    stem(0:length(y3_down)-1,y3_down,'b','lineWidth',1.75)
+    title('4-Factor Down-Sample')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    subplot(2,2,4)
+    stem(0:length(y3_up)-1,y3_up,'b','lineWidth',1.75)
+    title('5-Factor Up-Sample')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf \leftarrow Amplitude \rightarrow')
+
+    head=sprintf('Lab 10 (b)\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
