@@ -1,0 +1,111 @@
+function exp9_6285(wp,ws,rp,as,T)
+    omegaP=wp/T;
+    omegaS=ws/T;
+    [cs,ds]=afd_butt(omegaP,omegaS,rp,as);
+    [b,a]=imp_invr(cs,ds,T);
+    [C,B,A]=dir2par(b,a)
+
+    [X,w]=freqz(b,a,1024);
+
+    subplot(1,2,1)
+    plot((w/pi),abs(X),'r','lineWidth',1.75)
+    title('Magnitude Response')
+    grid on
+    xlabel('\bf \omega (Normalized w.r.t \pi) \rightarrow')
+    ylabel('\bf \midH(\omega)\mid \rightarrow')
+
+    subplot(1,2,2)
+    plot((w/pi),angle(X)/pi,'r','lineWidth',1.75)
+    title('Phase Response')
+    grid on
+    xlabel('\bf \omega (Normalized w.r.t \pi) \rightarrow')
+    ylabel('\bf \leftarrow \phi(\omega) \rightarrow')
+
+    head=sprintf('Lab 9\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
+
+%% Analog Lowpass Filter Design: Butterworth
+function [b,a]=afd_butt(wp,ws,rp,as)
+    if (wp<=0)
+        error('Passband Edge must be larger than 0!')
+    end
+
+    if (ws<=wp)
+        error('Stopband Edge must be larger than Passband Edge!')
+    end
+
+    if (rp<=0) || (as<0)
+        error('Passband ripple and/or Stopband Attenuation must be larger than 0!')
+    end
+
+    N=ceil((log10((10^(rp/10)-1)/(10^(as/10)-1)))/(2*log10(wp/ws)));
+    display(N)
+    omegaC=wp/((10^(rp/10)-1)^(1/(2*N)));
+    [b,a]=U_buttap(N,omegaC);
+end
+
+%% Unnormalized Butterworth Analog Lowpass Filter Prototype
+function [b,a]=U_buttap(N,omegaC)
+    [z,p,k]=buttap(N);
+    p=p*omegaC;
+    k=k*omegaC^N;
+    B=real(poly(z));
+    b=k*B;
+    a=real(poly(p));
+end
+
+%% Impulse Invariance Transformation from Analog to Digital Filter
+function [b,a]=imp_invr(c,d,T)
+    [R,p,k]=residue(c,d);
+    p=exp(p*T);
+    [b,a]=residuez(R,p,k);
+    a=real(a');
+    b=real(b');
+end
+
+%% Direct form to Parallel form conversion
+function [C,B,A]=dir2par(b,a)
+    M=length(b);
+    N=length(a);
+    [r1,p1,C]=residuez(b,a);
+    p=cplxpair(p1,10000000*eps);
+    I=cplxcomp(p1,p);
+    r=r1(I);
+    K=floor(N/2);
+    B=zeros(K,2);
+    A=zeros(K,3);
+    if (K*2==N)
+        for i=1:2:N-1
+            Brow=r(i:1:i+1,:);
+            Arow=r(i:1:i+1,:);
+            [Brow,Arow]=residuez(Brow,Arow,[]);
+            B(fix((i+1)/2),:)=real(Brow);
+            A(fix((i+1)/2),:)=real(Arow);
+        end
+        [Brow,Arow]=residuez(r(N-1),p(N-1),[]);
+        B(K,:)=[real(Brow) 0];
+        A(K,:)=[real(Arow) 0];
+    else
+        for i=1:2:N-1
+            Brow=r(i:1:i+1,:);
+            Arow=r(i:1:i+1,:);
+            [Brow,Arow]=residuez(Brow,Arow,[]);
+            B(fix((i+1)/2),:)=real(Brow);
+            A(fix((i+1)/2),:)=real(Arow);
+        end
+    end
+end
+
+%% Index Matching for Comparing Complex Poles
+function [I]=cplxcomp(p1,p2)
+    I=[];
+    for j=1:1:length(p2)
+        for i=1:1:length(p1)
+            if(abs(p1(i)-p2(j)) < 10e-3)
+                I=[I i];
+            end
+        end
+    end
+    I=I';
+end
