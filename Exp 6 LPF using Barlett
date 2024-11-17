@@ -1,0 +1,36 @@
+function [h]=exp6b_6285(wp,ws)
+    wc=(ws+wp)/2;                                       % Cutoff Frequency
+    dw=ws-wp;                                           % Transition Width for LPF
+    M=ceil(6.1*pi/dw)+2;                                % Min. no. of required filter coefficients to be odd
+    n=linspace(0,M-1,M);                                % Sample Points
+    hd=sin(wc.*(n-((M-1)/2)))./(pi.*(n-((M-1)/2)));     % Desired Response
+    hd(1,((M-1)/2)+1)=wc/pi;                            % Desired Response at n=(M-1)/2
+    WI=zeros(1,M);                                      % Triangular Window Function
+    for k=0:(M-1)/2
+        WI(k+1)=2*k/(M-1);
+    end
+    for k=((M-1)/2)+1:M-1
+        WI(k+1)=2-((2*k)/(M-1));
+    end
+    h=hd.*WI;                                           % Linear Phase FIR LPF coefficients
+    [H,w]=freqz(h,1,1024);
+    wN=w./(2*pi);
+    HN=abs(H)./max(abs(H));
+
+    subplot(2,1,1)
+    stem(n,h,'r','linewidth',1.75)
+    title('LPF with Triangular Window Function')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf Amplitude \rightarrow')
+
+    subplot(2,1,2)
+    plot(wN,20.*log10(HN),'r','linewidth',1.75);
+    title('Frequency Response')
+    grid on
+    xlabel('\bf Normalized Frequency \rightarrow')
+    ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+
+    head=sprintf('Lab 6 (b)\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
