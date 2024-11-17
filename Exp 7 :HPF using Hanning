@@ -1,0 +1,31 @@
+function [h]=exp7b_6285(wp,ws)
+    wc=(ws+wp)/2;                                               % Cutoff Frequency
+    dw=abs(ws-wp);                                              % Transition Width for HPF
+    M=ceil(1.8*pi/dw)+1;                                        % No. of filter coefficients to be odd
+    n=linspace(0,M-1,M);                                        % Sample points
+    hd=((sin(pi.*(n-((M-1)/2))))./((pi.*(n-((M-1)/2))))) - ...  % Desired Response
+        ((sin(wc.*(n-((M-1)/2))))./((pi.*(n-((M-1)/2)))));
+    hd(1,((M-1)/2)+1)=1-(wc/pi);                                % Desired Reponse at n=((M-1)/2)+1
+    WI=0.5-0.5.*cos((2.*pi.*n)./(M-1));                         % Hanning Window Function
+    h=hd.*WI;                                                   % Linear Phase FIR High Pass Filter Coefficients
+    [H,w]=freqz(h,1,1024);
+    wN=w./(2*pi);
+    HN=abs(H)./max(abs(H));
+
+    subplot(2,1,1)
+    stem(n,h,'r','lineWidth',1.75)
+    title('HPF with Hanning Window Function')
+    grid on
+    xlabel('\bf Sample Number (n) \rightarrow')
+    ylabel('\bf Amplitude \rightarrow')
+
+    subplot(2,1,2)
+    plot(wN,20.*log10(HN),'r','linewidth',1.75);
+    title('Frequency Response')
+    grid on
+    xlabel('\bf Normalized Frequency \rightarrow')
+    ylabel('\bf \leftarrow Normalized Magnitude (dB)')
+    
+    head=sprintf('Lab 7 (b)\nAditya Saini   102206286   3EC9\n');
+    sgtitle(['\bf',head]);
+end
