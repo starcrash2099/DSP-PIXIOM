@@ -26,6 +26,11 @@ function [h]=exp7b_6285(wp,ws)
     xlabel('\bf Normalized Frequency \rightarrow')
     ylabel('\bf \leftarrow Normalized Magnitude (dB)')
     
-    head=sprintf('Lab 7 (b)\nAditya Saini   102206286   3EC9\n');
+    head=sprintf('Lab 7 (b)\nPriyam Ganguli   102206285   3EC8\n');
     sgtitle(['\bf',head]);
-end
+end%wp=0.4 and 
+w
+s
+=
+0.6
+ws=0.6.
