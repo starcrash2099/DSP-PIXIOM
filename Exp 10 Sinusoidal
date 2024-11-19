@@ -55,6 +55,10 @@ function [y1,y3]=exp10_6285(f1,f2)
     xlabel('\bf Sample Number (n) \rightarrow')
     ylabel('\bf \leftarrow Amplitude \rightarrow')
 
-    head=sprintf('Lab 10 (b)\nAditya Saini   102206286   3EC9\n');
+    head=sprintf('Lab 10 (b)\nPriyam Ganguli   102206285   3EC9\n');
     sgtitle(['\bf',head]);
 end
+%f1 = 5;  % Frequency of the first sinusoid (in Hz)
+f2 = 10; % Frequency of the second sinusoid (in Hz)
+
+[y1, y3] = exp10_6285(f1, f2);
