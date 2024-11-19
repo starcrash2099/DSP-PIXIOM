@@ -33,4 +33,4 @@ function [h]=exp6b_6285(wp,ws)
 
     head=sprintf('Lab 6 (b)\nAditya Saini   102206286   3EC9\n');
     sgtitle(['\bf',head]);
-end
+end%0.3,0.5
