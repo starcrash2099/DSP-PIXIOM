@@ -28,3 +28,6 @@ function [h]=exp6a_6285(wp,ws)
     head=sprintf('Lab 6 (a)\nAditya Saini   102206286   3EC9\n');
     sgtitle(['\bf',head]);
 end
+% 
+wp = 0.3 (Passband frequency)
+ws = 0.5 (Stopband frequency)
