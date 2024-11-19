@@ -39,6 +39,12 @@ function [h]=exp8_6285(ds,dp,dw,wc1,wc2)
     xlabel('\bf Normalized Frequency \rightarrow')
     ylabel('\bf \leftarrow Normalized Magnitude (dB)')
     
-    head=sprintf('Lab 8\nAditya Saini   102206286   3EC9\n');
+    head=sprintf('Lab 8\nPriyam Ganguli   102206285   3EC8\n');
     sgtitle(['\bf',head]);
-end
+end%ds = 0.2;   % Minimum stopband frequency (normalized)
+dp = 0.4;   % Maximum passband frequency (normalized)
+dw = 0.1;   % Transition width (normalized)
+wc1 = 0.25 * pi; % Lower cutoff frequency
+wc2 = 0.35 * pi; % Upper cutoff frequency
+
+h = exp8_6285(ds, dp, dw, wc1, wc2);
