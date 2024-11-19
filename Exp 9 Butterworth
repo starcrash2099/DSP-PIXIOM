@@ -109,3 +109,10 @@ function [I]=cplxcomp(p1,p2)
     end
     I=I';
 end
+%wp = 0.2;   % Passband edge frequency (normalized)
+ws = 0.4;   % Stopband edge frequency (normalized)
+rp = 1;     % Passband ripple (dB)
+as = 40;    % Stopband attenuation (dB)
+T = 1/1000; % Sampling period
+
+h = exp9_6285(wp, ws, rp, as, T);
