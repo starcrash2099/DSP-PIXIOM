@@ -29,6 +29,8 @@ function [wph,wsh,wch]=exp7a_6286(wp,ws)
     xlabel('\bf Normalized Frequency \rightarrow')
     ylabel('\bf \leftarrow Normalized Magnitude (dB)')
     
-    head=sprintf('Lab 7 (a)\nAditya Saini   102206286   3EC9\n');
+    head=sprintf('Lab 7 (a)\nPriyam Ganguli   102206285   3EC8\n');
     sgtitle(['\bf',head]);
-end
+end%wp = 0.4; % Passband frequency (normalized)
+ws = 0.6; % Stopband frequency (normalized)
+[wph, wsh, wch] = exp7a_6286(wp, ws);
